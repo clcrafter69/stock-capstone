@@ -1,0 +1,87 @@
+﻿@model StockJournal.Models.StockViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    ViewBag.userId = Model.userJournalId;
+}
+
+<h2>Create</h2>
+
+<h4>StockTrans</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="idFrmStock">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Stock.Id" />       
+            <div class="form-group">
+                <label asp-for="Stock.TransType" class="control-label"></label>
+                <input asp-for="Stock.TransType" class="form-control" />
+                <span asp-validation-for="Stock.TransType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.Amount" class="control-label"></label>
+                <input asp-for="Stock.Amount" class="form-control" />
+                <span asp-validation-for="Stock.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.NumShares" class="control-label"></label>
+                <input asp-for="Stock.NumShares" class="form-control" />
+                <span asp-validation-for="Stock.NumShares" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.StockName" class="control-label"></label>
+                <input asp-for="Stock.StockName" class="form-control" />
+                <span asp-validation-for="Stock.StockName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.Ticker" class="control-label"></label>
+                <input asp-for="Stock.Ticker" class="form-control" />
+                <span asp-validation-for="Stock.Ticker" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.StopLoss" class="control-label"></label>
+                <input asp-for="Stock.StopLoss" class="form-control" />
+                <span asp-validation-for="Stock.StopLoss" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.TransDate" class="control-label"></label>
+                <input asp-for="Stock.TransDate" class="form-control" />
+                <span asp-validation-for="Stock.TransDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.StockUserId" class="control-label"></label>
+                <input asp-for="Stock.StockUserId" class="form-control" value ="@Model.userJournalId" />
+                <span asp-validation-for="Stock.StockUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" id="idSubmitForm"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    (function () {
+        var cash = document.getElementById("transDate");
+        var subButton = document.getElementById("idSubmitForm");
+        var frmStock = document.getElementById("idFrmStock");
+        window.onload = function () {
+            //cash.innerText = "";    
+            //frmStock.reset();
+            }
+        //subButton.addEventListener("click", function () {
+        //    frmStock.submit();
+            
+
+        //});
+
+    })();
+</script>
+}

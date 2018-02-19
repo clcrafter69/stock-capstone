@@ -1,0 +1,99 @@
+﻿@model IEnumerable<StockJournal.Models.StockTrans>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.userID = Model.FirstOrDefault().StockUserId;
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+    @Html.ActionLink("Create", "Create", new { userId = Model.FirstOrDefault().StockUserId})
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumShares)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ticker)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StopLoss)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockUserId)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumShares)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ticker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StopLoss)
+            </td>
+            <td id="transDate">
+                @Html.DisplayFor(modelItem => item.TransDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockUserId)
+            </td>
+            <td>
+               
+                @Html.ActionLink("Edit", "Edit", new {  id=item.StockUserId }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+    (function () {
+        var cash = document.getElementById("transDate");
+
+        window.onload = function () {
+            //cash.innerText = "";
+        }
+
+    })();
+    </script>
+}

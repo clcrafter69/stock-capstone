@@ -1,8 +1,48 @@
-﻿body {
+﻿
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    /*background-image: url("grainy.jpg");
+    background-size: cover;*/
+    /*background-color: #00308F;*/
+    background: linear-gradient(to right, green,#00308F);
+    color: white;
 }
 
+.dropdown-content {
+    background-color: lightblue;
+    min-width: 160px;
+    display: inline-block;
+    padding: 8px 10px;
+    color: #00308F;
+}
+ .dropdown
+{
+   
+    display:block;
+}
+
+
+.home {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    /*background-image: url("good.jpg");
+    background-size: cover;*/
+    background-color: #00308F;
+    color: white;
+}
+a {
+    font-weight: bolder;
+    color: darkgoldenrod;
+}
+
+    a:hover {
+        color: yellow;
+    }
+
+section {
+    color: black;
+}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -10,6 +50,111 @@
     padding-right: 15px;
 }
 
+
+.form-design {
+    border: solid;
+    border-radius: 5%;
+    padding-top: 2rem;
+}
+
+.dropdownDesign {
+    display: inline;
+    padding: 1rem;
+    display: inline;
+    border: solid;
+    border-radius: 5%;
+    border-color: white;
+}
+
+.testdesign {
+    background-color: rebeccapurple;
+    border: solid;
+    border-radius: 5%;
+    border-color: dimgrey;
+    border-width: thick;
+    margin: 15rem;
+    margin-top: 30rem;
+}
+
+#SummaryDiv {
+    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+    color: goldenrod;
+    clear: both;
+}
+
+.DetailsDiv {
+    margin-left: 1rem;
+    margin-top:2rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 12px;
+    color: goldenrod;
+    clear: both;
+}
+
+.splashDiv {
+    margin-top: 10rem;
+    background-color: blue;
+    border: solid;
+    border-width: thick;
+    border-color: antiquewhite;
+}
+
+#ExplainDiv {
+    margin-top: 1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 24px;
+    color: goldenrod;
+    clear: both;
+}
+
+.inputTicker{
+    text-transform:uppercase;
+}
+.quizLabel {
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0.5rem;
+}
+
+#FinalDiv {
+    margin-top: 1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 24px;
+    color: goldenrod;
+    clear: both;
+    display: none;
+}
+
+.quizForm {
+    padding: 1.5rem;
+    background-color: whitesmoke;
+    border: solid;
+    border-color: dimgrey;
+    border-width: thin;
+    margin-bottom: 1rem;
+}
+
+.portForm {
+    max-width:80%;
+    margin-left:20px;
+    margin-right:100px;
+    padding: 1.5rem;
+    border: solid;
+    border-color: antiquewhite;
+    border-width: 2px;
+    margin-bottom: 1rem;
+}
+
+.buttonForm {
+    margin: 3.0rem;
+    margin-left: 7rem;
+}
+
+.hideButton {
+    display: none;
+}
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;

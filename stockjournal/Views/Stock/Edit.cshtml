@@ -5,25 +5,24 @@
     ViewBag.userId = Model.userJournalId;
 }
 
-<h2>Create</h2>
+<h2>Edit Tranaction</h2>
 
-<h4>StockTrans</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" id="idFrmStock">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Stock.Id" />       
+            <input type="hidden" asp-for="Stock.Id" />    
             <div class="form-group">
                 @*<label asp-for="Stock.TransType" class="control-label"></label>
                 <input asp-for="Stock.TransType" class="form-control" />
                 <span asp-validation-for="Stock.TransType" class="text-danger"></span>*@
+                @*<label asp-for="Stock.TransType" class="control-label"></label>
+        <input asp-for="Stock.TransType" class="form-control" />
+        <span asp-validation-for="Stock.TransType" class="text-danger"></span>*@
                 <label asp-for="Stock.TransType" class="control-label dropdown"></label>
-                @*<select asp-for="Stock.TransType">
-                    <option value="BUY">BUY</option>
-                    <option value="SELL">SELL</option>
-                </select>*@
-                <select asp-for ="Stock.TransType" asp-items="Model.transTypes"class="dropdown-content"></select>
+                <select asp-for="Stock.TransType" asp-items="Model.transTypes" class="dropdown-content"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Stock.Amount" class="control-label"></label>
@@ -55,40 +54,20 @@
                 <input asp-for="Stock.TransDate" class="form-control" />
                 <span asp-validation-for="Stock.TransDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Stock.StockUserId" class="control-label"></label>
-                <input asp-for="Stock.StockUserId" class="form-control" value ="@Model.userJournalId" />
+                <input asp-for="Stock.StockUserId" class="form-control" />
                 <span asp-validation-for="Stock.StockUserId" class="text-danger"></span>
-            </div>
+            </div>*@
+            <input type="hidden" asp-for="Stock.StockUserId" />    
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" id="idSubmitForm"/>
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-   
     @Html.ActionLink("Manage Transactions", "Index", "Stock", new { userId = Model.userJournalId }, null)
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script>
-    (function () {
-        var cash = document.getElementById("transDate");
-        var subButton = document.getElementById("idSubmitForm");
-        var frmStock = document.getElementById("idFrmStock");
-        window.onload = function () {
-            //cash.innerText = "";    
-            //frmStock.reset();
-            }
-        //subButton.addEventListener("click", function () {
-        //    frmStock.submit();
-            
-
-        //});
-
-    })();
-</script>
-}

@@ -8,54 +8,54 @@
 
 <h2>MY PROFILE</h2>
 
-<h4>StockUser</h4>
+
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-offset-4 col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="user.Id"/>          
             <div class="form-group">
                 <label asp-for="user.FName" class="control-label"></label>
-                <input asp-for="user.FName" class="form-control" />
+                <input asp-for="user.FName" class="form-control" disabled />
                 <span asp-validation-for="user.FName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="user.LName" class="control-label"></label>
-                <input asp-for="user.LName" class="form-control" />
+                <input asp-for="user.LName" class="form-control" disabled />
                 <span asp-validation-for="user.LName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="user.Email" class="control-label"></label>
-                <input asp-for="user.Email" value ="@Model.loginUserId" class="form-control" />
+                <input asp-for="user.Email" value ="@Model.loginUserId" class="form-control" disabled />
                 <span asp-validation-for="user.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="user.TotCash" class="control-label" ></label>
-                <input asp-for="user.TotCash" class="form-control" id="idCash"/>
+                <input asp-for="user.TotCash" class="form-control" id="idCash" disabled/>
                 <span asp-validation-for="user.TotCash" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="user.TotEquity" class="control-label"></label>
-                <input asp-for="user.TotEquity" class="form-control" />
+                <input asp-for="user.TotEquity" class="form-control" disabled/>
                 <span asp-validation-for="user.TotEquity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="user.TotPortfolio" class="control-label"></label>
-                <input asp-for="user.TotPortfolio" class="form-control" />
+                <input asp-for="user.TotPortfolio" class="form-control" disabled />
                 <span asp-validation-for="user.TotPortfolio" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <input type="submit" value="Save Profile" class="btn btn-default" />
-            </div>
+            </div>*@
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="col-md-offset-4 col-md-4">
+   
 
-    @Html.ActionLink("Manage Transactions", "Index", "Stock", new { userId = Model.user.Id }, null)
+    @Html.ActionLink("Manage Transactions", "Index", "Stock", new { userId = Model.user.Id }, new { @class = "btn btn-primary btn-large" })
 </div>
 
 @section Scripts {
@@ -63,6 +63,8 @@
 <script>
     (function () {
         var cash = document.getElementById("idCash");
+        var equity = document.getElementById("idEquity");
+
 
         window.onload = function () {
             if (cash.innerText == "") {

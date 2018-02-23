@@ -1,0 +1,78 @@
+﻿@model StockJournal.Models.StockViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    ViewBag.userId = Model.userJournalId;
+}
+
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>StockTrans</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.TransType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.TransType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.Amount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.Amount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.NumShares)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.NumShares)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.StockName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.StockName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.Ticker)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.Ticker)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.StopLoss)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.StopLoss)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.TransDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.TransDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.StockUserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.StockUserId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+      
+    </form>
+    @Html.ActionLink("Manage Transactions", "Index", "Stock", new { userId = Model.userJournalId }, null)
+
+</div>

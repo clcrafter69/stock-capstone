@@ -2,22 +2,26 @@
 
 @{
     ViewData["Title"] = "Index";
-    ViewBag.userID = Model.FirstOrDefault().StockUserId;
+    //ViewBag.userID = Model.FirstOrDefault().StockUserId;
 }
 
-<h2>Index</h2>
+<h2>Transaction Dashboard</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
-    @Html.ActionLink("Create", "Create", new { userId = Model.FirstOrDefault().StockUserId})
-    
+   
+   
+    <br />
+    @Html.ActionLink("Enter New Transaction", "Create", new { userId = Model.FirstOrDefault().StockUserId }, new {@class = "btn btn-primary btn-large" })
+    <br />
+
+
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticker)
+            </th>
                 <th>
                     @Html.DisplayNameFor(model => model.TransType)
                 </th>
@@ -30,9 +34,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.StockName)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ticker)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.StopLoss)
                 </th>
@@ -40,8 +42,6 @@
                     @Html.DisplayNameFor(model => model.TransDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.StockUserId)
-                </th>
             <th></th>
         </tr>
     </thead>
@@ -49,7 +49,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.Ticker)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TransType)
@@ -64,22 +64,16 @@
                 @Html.DisplayFor(modelItem => item.StockName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ticker)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.StopLoss)
             </td>
             <td id="transDate">
                 @Html.DisplayFor(modelItem => item.TransDate)
-            </td>
+            </td>          
             <td>
-                @Html.DisplayFor(modelItem => item.StockUserId)
-            </td>
-            <td>
-               
-                @Html.ActionLink("Edit", "Edit", new {  id=item.StockUserId }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+               |
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
 }

@@ -11,7 +11,10 @@ namespace StockJournal.Data
         StockTrans AddStockTrans(StockTrans stock);
         StockTrans GetStockTrans(int Id);
         List<StockTrans> ListAllTrans(int userId);
-        List<StockTrans> FilterStockTrans(string stockticker, string transDate, string transType);
+        List<StockTrans> FilterStockTrans(int Id,string stockticker, string transDate);
+        List<StockTrans> FilterStockTrans(int Id, string transDate);
+        void UpdateStock(StockTrans changedStock);
+        void DeleteStock(StockTrans deletedStock);
         //retrieve list based on criteria
 
 

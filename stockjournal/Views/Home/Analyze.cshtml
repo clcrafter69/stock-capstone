@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewData["Title"] = "Analyze";
+}
+
+<h3>PORTFOLIO STATS FOR CYNTHIA CRAFTER</h3>
+
+
+<section>
+    <div class="row">
+        <form class="form-inline">
+
+            <div class="row buttonForm ">
+                <label for="selTicker" class="quizLabel ">Ticker:</label>
+                <div class="form-group">
+     
+                    <input type="text" class="form-control input-group input-group-sm col-sm-1 inputTicker" id="selTicker">
+                </div>
+
+                <label for="selDateRange" class="quizLabel">Date Range:</label>
+                <div class="form-group dropdownDesign">
+                    <select id="selDateRange">
+                        <option selected="selected" value="">Please select</option>
+                        <option value="ALL">All</option>
+                        <option value="TODAY">Today</option>
+                        <option value="WEEK">Last 7 Days</option>
+                        <option value="MONTH">Last 30 Days</option>
+                        <option value="YTD">YTD</option>
+                    </select>
+                </div>
+
+                <button type="button" id="checkPerform" class="btn btn-warning mr-md-2 mb-0 buttonForm"> Analyze!</button>
+              
+            </div>
+
+
+
+        </form>
+
+        <div id="QAForm" class="portForm row ">
+
+            <div id="SummaryDiv" class="form-inline col-sm-12">  
+                <div class="form-group ">
+                    <label class=" control-label" for="idPortfolio">Portfolio Balance:</label>
+                    <input type="text" class="form-control"  placeholder=" 0.00" id="idPortfolio" >
+                </div>
+                <div class="form-group">
+                    <label class="control-label"  for="idReturn">Rate of Return:</label>
+                    <input type="text" class="form-control " placeholder=" 0.00" id="idReturn" disabled>
+                </div>
+        </div>
+
+            <div id="StatsDiv" class="col-md-12 DetailsDiv">
+                <div class="row col-md-6">
+                    <div class="form-group">
+                        <label class=" control-label" for="idCash">Total Cash Balance:</label>
+                        <input type="text" class="form-control" placeholder=" 0.00" id="idCash" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class=" control-label" for="idProfit">Total Profit (or loss):</label>
+                        <input type="text" class="form-control" placeholder=" 0.00" id="idProfit" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="idAvgShares">Avg # of Shares:</label>
+                        <input type="text" class="form-control " placeholder=" 0" id="idAvgShares" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="idBuys"># of Buys:</label>
+                        <input type="text" class="form-control " placeholder=" 0" id="idBuys" disabled>
+                    </div>
+                    </div>
+
+                    <div class="row col-md-6">
+                        <div class="form-group">
+                            <label class=" control-label" for="idEquity">Total Equity Balance:</label>
+                            <input type="text" class="form-control" placeholder=" 0.00" id="idEquity" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label" for="idCommission">Total Commissions:</label>
+                            <input type="text" class="form-control" placeholder=" 0.00" id="idCommission" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="idRisk">Avg Risk:</label>
+                            <input type="text" class="form-control " placeholder=" 0.00" id="idRisk" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="idSells"># of Sells:</label>
+                            <input type="text" class="form-control " placeholder=" 0" id="idSells" disabled>
+                        </div>
+                    </div>
+
+                </div>
+            <div id="ExplainDiv">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="FinalDiv">
+
+
+        </div>
+        <button type="button" id="next-question" class="btn btn-success mr-md-2 mb-0 hideButton"> Next Question</button>
+        <button type="button" id="submit-answer" class="btn btn-success mr-md-2 mb-0 hideButton"> Submit Answers</button>
+    </div>
+</section>
+@section scripts{
+    <script>
+
+        (function () {
+            //****global variables******
+
+            var CheckPerform = document.getElementById("checkPerform");
+            var TotPortfolio = document.getElementById("idPortfolio");
+            var TotReturn = document.getElementById("idReturn");
+            var TotCash = document.getElementById("idCash");
+            var TotProfit = document.getElementById("idProfit");
+            var AvgShares = document.getElementById("idAvgShares");
+            var Buys = document.getElementById("idBuys");
+            var Equity = document.getElementById("idEquity");
+            var Commission = document.getElementById("idCommission");
+            var Risk = document.getElementById("idRisk");
+            var Sells = document.getElementById("idSells");
+            var DateRange = document.getElementById("selDateRange");
+            var chosenDateRange;
+            var chosenTicker;
+            var userId; //user's unique id'
+            var Ticker = document.getElementById("selTicker");
+
+
+            //methods
+
+            window.onload = function () {
+                //getUser();
+                chosenTicker = "";
+            }
+
+
+            CheckPerform.addEventListener("click", function () {
+                var analyzeUrl = "";
+                var temp = userId;
+                //Console.WriteLine(userId.toString());
+                if (chosenTicker == "")
+                {
+                    analyzeUrl = "/api/analyze/" + userId.toString() + "/" + chosenDateRange.toString();
+                    //analyzeUrl = "/api/analyze/2/" + chosenDateRange.toString();
+                }
+                else 
+                {
+                    analyzeUrl = "/api/analyze/" + userId + "/" + chosenDateRange.toString() + "/" + chosenTicker.toString();
+
+                }
+                makeAnalyzeRequest(analyzeUrl);
+
+            });
+
+
+            var getUser = function getUser() {
+
+                httpRequest = new XMLHttpRequest(); // This is my handle for doing AJAX requests
+                //store the called url
+                //urlCalled= url;
+
+                if (!httpRequest) {
+                    console.log("Error creating SMLHttp object");
+                    return false;
+                }
+
+                httpRequest.onreadystatechange = getUserData;
+
+                // httpRequest.open("GET", "/api/quiz/2/2");
+                httpRequest.open("GET", "/api/analyze");
+                httpRequest.send();
+            }
+
+    
+
+
+            var makeAnalyzeRequest = function makeAnalyzeRequest(url) {
+                httpRequest = new XMLHttpRequest(); // This is my handle for doing AJAX requests
+                //store the called url
+                //urlCalled= url;
+
+                if (!httpRequest) {
+                    console.log("Error creating SMLHttp object");
+                    return false;
+                }
+         
+                httpRequest.onreadystatechange = getStockData;              
+
+                // httpRequest.open("GET", "/api/quiz/2/2");
+                httpRequest.open("GET", url);
+                httpRequest.send();
+            }
+
+            var getUserData = function getUserData() {
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                    if (httpRequest.status === 200) {
+
+                        var dataArr = JSON.parse(httpRequest.responseText);
+                        userId = dataArr;
+
+                    }
+                }
+
+            }
+
+            var getStockData = function getStockData() {
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                    if (httpRequest.status === 200) {
+                       
+                        var dataArr = JSON.parse(httpRequest.responseText);
+                                            
+                       
+
+                        //populate textboxes
+                        TotPortfolio.value = dataArr.totalPortfolio.toFixed(2);
+                        TotReturn.value = (dataArr.rate * 100).toFixed(2);
+                        Equity.value = dataArr.totEquity.toFixed(2);
+                        TotCash.value = dataArr.totCash.toFixed(2);
+                        TotProfit.value = dataArr.amount.toFixed(2);
+                        AvgShares.value = dataArr.avgShares;
+                        Buys.value = dataArr.numSharesPurch;
+                        Equity.value = dataArr.totEquity.toFixed(2);
+                        Commission.value = dataArr.totCommission.toFixed(2);
+                        Risk.value = dataArr.avgRisk.toFixed(2);
+                        Sells.value = dataArr.numSharesSold;
+                       
+                    }
+                }
+            };
+
+            //Evaluate Date Range dropdown
+
+            DateRange.addEventListener("change", function () {
+                //alert("this is a test of level " + Level.value);
+                chosenDateRange = DateRange.value;
+                getUser();
+            });
+
+            //DateRange.addEventListener("change", getUser);
+
+            Ticker.addEventListener("change", function () {
+                
+                chosenTicker = Ticker.value;
+            
+            });
+            
+         })();
+    </script>
+
+    }

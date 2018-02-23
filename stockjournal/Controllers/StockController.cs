@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockJournal.Models;
 using StockJournal.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StockJournal.Controllers
 {
+    [Authorize]
     public class StockController : Controller
     {
         private readonly IStockTransRepo _stockTransRepo;
@@ -43,7 +45,11 @@ namespace StockJournal.Controllers
         // GET: Stock/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            StockTrans stock = _stockTransRepo.GetStockTrans(id);
+            StockViewModel stockview = new StockViewModel();
+            stockview.userJournalId = stock.StockUserId;
+            stockview.Stock = stock;
+            return View(stockview);
         }
 
         // GET: Stock/Create
@@ -92,19 +98,52 @@ namespace StockJournal.Controllers
         // GET: Stock/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            
+            StockViewModel newStockView = new StockViewModel();
+            StockTrans stock = _stockTransRepo.GetStockTrans(id);
+            var newStockId = stock.StockUserId;
+            newStockView.Stock = stock;
+            newStockView.userJournalId = newStockId;
+
+            return View(newStockView);
         }
 
+
+
+        //public ActionResult Edit(int id, StockTrans changedStock, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
+        //        _stockTransRepo.UpdateStock(changedStock);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
         // POST: Stock/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, StockViewModel changedStock, IFormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _stockTransRepo.UpdateStock(changedStock.Stock);
+                    // return RedirectToAction(nameof(Index));
+                    //ModelState.Clear();
+
+                }
+
+                StockViewModel newStockView = new StockViewModel();
+                newStockView.userJournalId = changedStock.Stock.StockUserId;
+                //newStockView.Stock = changedStock;
+                return View(newStockView);
             }
             catch
             {
@@ -115,7 +154,11 @@ namespace StockJournal.Controllers
         // GET: Stock/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            StockTrans stock = _stockTransRepo.GetStockTrans(id);
+            StockViewModel stockview = new StockViewModel();
+            stockview.userJournalId = stock.StockUserId;
+            stockview.Stock = stock;
+            return View(stockview);
         }
 
         // POST: Stock/Delete/5
@@ -125,9 +168,20 @@ namespace StockJournal.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                StockTrans stock = _stockTransRepo.GetStockTrans(id);
+                StockViewModel stockview = new StockViewModel();
+                stockview.userJournalId = stock.StockUserId;
+                //stockview.Stock = stock;
+                if (ModelState.IsValid)
+                {
+                    
+                    _stockTransRepo.DeleteStock(_stockTransRepo.GetStockTrans(id));
+                    ModelState.Clear();
+                }
+                
+                return View(stockview);
 
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index), new { id = stockview.userJournalId });
             }
             catch
             {

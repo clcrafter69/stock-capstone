@@ -5,9 +5,9 @@
     ViewBag.userId = Model.userJournalId;
 }
 
-<h2>Create</h2>
+<h2>Enter Transaction </h2>
 
-<h4>StockTrans</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -54,7 +54,7 @@
                 <label asp-for="Stock.TransDate" class="control-label"></label>
                 <input asp-for="Stock.TransDate" class="form-control" />
                 <span asp-validation-for="Stock.TransDate" class="text-danger"></span>
-            </div>
+            </div> 
             <div class="form-group">
                 <label asp-for="Stock.StockUserId" class="control-label"></label>
                 <input asp-for="Stock.StockUserId" class="form-control" value ="@Model.userJournalId" />

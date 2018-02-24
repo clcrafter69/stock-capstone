@@ -121,7 +121,7 @@ namespace StockJournal.Data
             {
                 //Include(a => a.Answers).Where(a => a.Id == id)
                 convertDate = determineDate(transDate);
-                return _dbStockContext.Stock.Include(a => a.StockUser).Where(a => a.TransDate <= convertDate && a.StockUserId == userId).OrderBy(a => a.TransDate)
+                return _dbStockContext.Stock.Include(a => a.StockUser).Where(a => a.TransDate >= convertDate && a.StockUserId == userId).OrderBy(a => a.TransDate)
                   .ToList();
 
                 //return _dbStockContext.User.
